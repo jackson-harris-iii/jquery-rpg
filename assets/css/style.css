@@ -2,8 +2,31 @@
     width: 200px;
     height: 200px;
    background-color: aqua;
+   
 }
 
-.yourCharacter {
-    background-color: black;
+/* .yourCharacter {
+} */
+
+.characterData {
+    background: white;
+}
+
+.enemies {
+   background-color: red;
+    
+}
+
+.enemy {
+    background-color: red;
+    display: inline;
+    
+}
+
+.defender {
+    background-color: grey;
+}
+
+.attackButton {
+    display: inline;
 }
