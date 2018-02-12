@@ -28,6 +28,7 @@ var characters = [
 //Global Variables
     var playableCharacters = [];
     var chosenOne = "";
+    var defendingOne = "";
     var enemies = [];
     var isDefender = false;
     var selectedYet = false;
@@ -66,7 +67,7 @@ function takePositions(character) {
         $(this).children().css("background-color", "red")
         console.log($(this))
         $(this).appendTo("#enemies");
-        $(this).click(battle);
+        $(this).click(defense);
     })
     }
     else if (isDefender == false) {
@@ -74,12 +75,16 @@ function takePositions(character) {
         console.log("you has defender")
         console.log($(this));
         var defenderID = character.target.id;
-    }        
+
+       defendingOne = enemies.find(function (obj) {
+           var choice = obj.reference == defenderID
+           return choice
+        })
+    }            
 }
 
-function battle(defender) {
-    
-
+function defense(defendingOne) {
+    //here you will put the defindingOne on defednse.
 }
 
 //creates an array of enemies
