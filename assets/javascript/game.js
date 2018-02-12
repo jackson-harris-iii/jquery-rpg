@@ -25,6 +25,12 @@ var characters = [
     ["assets/images/gotenks.png", "Gotenks", 120, 15, 15, "gotenks"],
     ["assets/images/mVegeta.png", "Majin Vegeta", 150, 30, 30, "mVegeta"]
 ];
+//Global Variables
+    var playableCharacters = [];
+    var chosenOne = "";
+    var enemies = [];
+    var isDefender = false;
+    var selectedYet = false;
 
 //creates a playable character from the characters array
 function loadCharacters(characters) {
@@ -37,39 +43,49 @@ function loadCharacters(characters) {
     
 }
 
+
 function takePositions(character) {
-   
-    var chosenID = character.target.id;
-    console.log(character.currentTarget);
-   //the character the player clicks on will be identified as their chosen player from the pool of playable characters
-    chosenOne = playableCharacters.find(function(obj) {
-        var choice = obj.reference == chosenID
-        return choice
-    })
-    var selectedCharacter = $(character.currentTarget).remove();
-    selectedCharacter.appendTo("#yourCharacter").removeClass("playable");
+   if (selectedYet == false){
+       selectedYet = true
+        var chosenID = character.target.id;
+        console.log(character.currentTarget);
+    //the character the player clicks on will be identified as their chosen player from the pool of playable characters
+        chosenOne = playableCharacters.find(function(obj) {
+            var choice = obj.reference == chosenID
+            return choice
+        })
+        var selectedCharacter = $(character.currentTarget).remove();
+        selectedCharacter.appendTo("#yourCharacter").removeClass("playable");
 
-    //console.log(chosenOne);
-    $("#toolTip").html("<h1>Pick An Enemy!</h1>")
+        //console.log(chosenOne);
+        $("#toolTip").html("<h1>Pick An Enemy!</h1>")
 
-    enemies = yourEnemies(playableCharacters, chosenOne);
+        enemies = yourEnemies(playableCharacters, chosenOne);
     
     $(".playable").each(function () {
         $(this).children().css("background-color", "red")
         console.log($(this))
         $(this).appendTo("#enemies");
+        $(this).click(battle);
     })
-        
-    // var selectCharacter = 
-    // console.log(chosenOne)
-    // // setStage(chosenOne);
-    
+    }
+    else if (isDefender == false) {
+        isDefender = true
+        console.log("you has defender")
+        console.log($(this));
+        var defenderID = character.target.id;
+    }        
 }
+
+function battle(defender) {
+    
+
+}
+
 //creates an array of enemies
 function yourEnemies(playableCharacters,chosenOne) {
     return playableCharacters.filter(characters => characters !== chosenOne);       
 }
-
 
 function displayCharacters(characters) {
     $("#toolTip").html("<h1>Select Your Character</h1>")
@@ -79,18 +95,15 @@ function displayCharacters(characters) {
         var avatarDiv = $("<div></div>").attr("id", element.reference).attr( "class", "card playable",);
 
         //adds image to character card and enables a character to be chosen
-        avatarDiv.prepend("<img class='card-img-top avatars' id='" + element.reference + "' src='" + element.avatar + "'/>").click(takePositions);
+        avatarDiv.prepend("<img class='card-img-top avatars' id='" + element.reference + "' src='" + element.avatar + "'/>");
         
         $("#chooseCharacter").append(avatarDiv);
     });
 }
 
-
-var playableCharacters = [];
-var chosenOne = "";
-var enemies = [];
 loadCharacters(characters);
 //console.log(playableCharacters);
 displayCharacters(playableCharacters);
 $("#attackButton").hide();
+$(".playable").click(takePositions);
 })
