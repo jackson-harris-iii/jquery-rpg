@@ -26,7 +26,7 @@ function Character (avatar, name, health, attack, defense, reference) {
 //array of characters with their raw data
 var characters = [
     ["assets/images/fTrunks.png", "Trunks", 100, 10, 5, "fTrunks"],
-    ["assets/images/gogeta.png", "Gogeta", 170, 25, 15, "gogeta"],
+    ["assets/images/gogeta.png", "Gogeta", 170, 25, 50, "gogeta"],
     ["assets/images/gotenks.png", "Gotenks", 120, 15, 8, "gotenks"],
     ["assets/images/mVegeta.png", "Majin Vegeta", 150, 30, 15, "mVegeta"]
 ];
@@ -119,7 +119,7 @@ function battle() {
         yourHealth = defendingOne.attackBack(chosenOne)
         yourHealthDiv = chosenOne.reference + "-health"
         $('#'+yourHealthDiv).html('HP: '+ yourHealth)
-        healthCheck()
+    
 
         //Increases attack for your character after each attack
         chosenOne.powerUp()
@@ -128,18 +128,12 @@ function battle() {
         console.log(defendingOne)
 
     }
+
+    else if (chosenOne.health <= 0){
+        $("#toolTip").html("<h1>YOU LOSE</hs1>")
+    }
 }
 
-function healthCheck() {
-    if (chosenOne.health <= 0) {
-        $("#toolTip").html("<h1>YOU LOSE</h1>")
-    }
-    
-    else if (defendingOne.health <= 0) {
-        $("#toolTip").html("<h1>"+ defendingOne.name +" is Defeated!</h1>")
-    }
-    
-}
 
 function battleReport(yourData, enemyData) {
     $("#toolTip").html()
