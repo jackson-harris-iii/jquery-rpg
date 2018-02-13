@@ -35,6 +35,7 @@ var characters = [
     var chosenOne = "";
     var defendingOne = "";
     var enemies = [];
+    var deadOnes = [];
     var isDefender = "";
     var selectedYet = false;
     var yourHealth = "";
@@ -49,6 +50,24 @@ function loadCharacters(characters) {
         
     });
     
+}
+
+function newGame() {
+    $("#playAgain").hide()
+    $("#yourCharacter").empty()
+    playableCharacters = [];
+    chosenOne = "";
+    defendingOne = "";
+    enemies = [];
+    deadOnes = [];
+    isDefender = "";
+    selectedYet = false;
+    yourHealth = "";
+    enemyHealth = "";
+    loadCharacters(characters);
+    displayCharacters(playableCharacters);
+    $(".playable").click(takePositions);
+    $(".enemies").click(takePositions);
 }
 
 
@@ -136,13 +155,22 @@ function healthCheck() {
     }
     
     else if (defendingOne.health <= 0) {
-        $("#toolTip").html("<h1>"+ defendingOne.name +" is Defeated!</h1>")
+        $("#toolTip").html("<h1>" + defendingOne.name +" is Defeated!</h1> <h3>Choose Next Opponent</h3>")
+        $("#defendingOne").empty()
+        isDefender = false
+        deadOnes.push(defendingOne)
+        gameOver()
     }
     
 }
 
-function battleReport(yourData, enemyData) {
-    $("#toolTip").html()
+
+function gameOver() {
+    if (deadOnes.length == enemies.length) {
+        $("#toolTip").html("<h1> YOU ARE VICTORIOUS!</h1>")
+        $("#attackButton").hide();
+        $("#playAgain").show();
+    }
 }
 
 //creates an array of enemies
@@ -176,9 +204,10 @@ function displayCharacters(characters) {
 }
 
 loadCharacters(characters);
-//console.log(playableCharacters);
 displayCharacters(playableCharacters);
 $("#attackButton").hide();
+$("#playAgain").hide();
+$("#playAgain").click(newGame);
 $("#attackButton").click(battle);
 $("#yourCharacter").hide();
 $(".playable").click(takePositions);
