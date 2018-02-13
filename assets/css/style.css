@@ -1,29 +1,46 @@
 h1, h2, h3 {
     display: inline
 }
-
-.avatars {
-    width: 150px;
-    height: 150px;
-   background-color: aqua;
-   
+.avatar {
+    max-height: 375spx;
+    max-width: 230px;
 }
+.avatars {
+   max-width:100%;
+   max-height:60%; 
+}
+
+.characterSelect {
+background: linear-gradient(177deg, #19d4a4, #e5f00e, #c02f12, #e5f00e, #19d4a4);
+background-size: 1000% 1000%;
+
+-webkit-animation: AnimationName 22s ease infinite;
+-moz-animation: AnimationName 22s ease infinite;
+animation: AnimationName 22s ease infinite;
+}
+
 
 .yourCharacter {
 }
 
 .characterData {
-    background: white;
+    background: rgb(43, 40, 35);
+    color: #e5f00e
 }
 
 .enemies {
-   background-color: red;
+   background-color: rgb(34, 29, 29);
     
 }
 
 .enemy {
-    background-color: red;
-    display: inline;
+background: linear-gradient(177deg, #010e0a, #c02f12, #ed6f10, #c02f12, #000605);
+background-size: 1000% 1000%;
+
+-webkit-animation: AnimationName 22s ease infinite;
+-moz-animation: AnimationName 22s ease infinite;
+animation: AnimationName 22s ease infinite;
+display: inline;
     
 }
 
@@ -40,4 +57,20 @@ h1, h2, h3 {
 
 .defenseWords {
     display: inline;
+}
+
+@-webkit-keyframes AnimationName {
+    0%{background-position:51% 0%}
+    50%{background-position:50% 100%}
+    100%{background-position:51% 0%}
+}
+@-moz-keyframes AnimationName {
+    0%{background-position:51% 0%}
+    50%{background-position:50% 100%}
+    100%{background-position:51% 0%}
+}
+@keyframes AnimationName { 
+    0%{background-position:51% 0%}
+    50%{background-position:50% 100%}
+    100%{background-position:51% 0%}
 }

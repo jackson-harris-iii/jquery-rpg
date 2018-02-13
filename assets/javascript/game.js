@@ -79,7 +79,6 @@ function takePositions(character) {
        isDefender = false;
        $("#yourCharacter").show();
         var chosenID = character.target.id;
-        //console.log(character.currentTarget);
     //the character the player clicks on will be identified as their chosen player from the pool of playable characters
         chosenOne = playableCharacters.find(function(obj) {
             var choice = obj.reference == chosenID
@@ -91,13 +90,13 @@ function takePositions(character) {
         var selectedCharacter = $(character.currentTarget).remove();
         selectedCharacter.appendTo("#yourCharacter").removeClass("playable");
 
-        //console.log(chosenOne);
+    
         $("#toolTip").html("<h1>Pick An Enemy!</h1> <h3>Choose Wisely</h3>")
 
         enemies = yourEnemies(playableCharacters, chosenOne);
     
     $(".playable").each(function () {
-        $(this).children().addClass("enemy")
+        $(this).children(".avatars").addClass("enemy").removeClass("characterSelect")
         //console.log($(this))
         $(this).appendTo("#enemies");
 
@@ -128,7 +127,7 @@ function battle() {
     if ( chosenOne.health > 0 && defendingOne.health > 0 ){
         
         //broadcasts battle sequence 
-        $("#toolTip").html("<h3>You attacked " + defendingOne.name + " for " + chosenOne.attack + " damage</h3>")
+        $("#toolTip").html("<h3>You attacked " + defendingOne.name + " for " + chosenOne.attack + " damage, " + defendingOne.name +" attacked you for " +defendingOne.defense+  " damage</h3>")
         
         //update enemey's health
         enemyHealth = defendingOne.health -= chosenOne.attack 
@@ -194,14 +193,14 @@ function displayCharacters(characters) {
         var avatarDiv = $("<div></div>").attr("id", element.reference).attr( "class", "card w-25 playable avatar");
 
         //adds image to character card and enables a character to be chosen
-        avatarDiv.prepend("<img class='card-img-top avatars' id='" + element.reference + "' src='" + element.avatar + "'/>");
+        avatarDiv.prepend("<img class='card-img-top avatars w-100 characterSelect' id='" + element.reference + "' src='" + element.avatar + "'/>");
 
         //creates card block div to hold the character data
-        var avatarCardBlock = $("<div></div>").attr("class", "card-block");
+        var avatarCardBlock = $("<div></div>").attr("class", "card-block h-25 characterData");
 
         //adds character data to the card block
-        avatarCardBlock.prepend("<h4 class='card-title characterData'>" + element.name +"</h4>");
-        avatarCardBlock.append("<p class='card-text characterData' id='"+element.reference+"-health'> HP: " + element.health +"</p>");
+        avatarCardBlock.prepend("<h4 class='card-title characterData text-center'>" + element.name +"</h4>");
+        avatarCardBlock.append("<p class='card-text characterData text-center' id='"+element.reference+"-health'> HP: " + element.health +"</p>");
 
         //adds all characer data to the holding div
         avatarDiv.append(avatarCardBlock);
