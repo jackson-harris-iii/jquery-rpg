@@ -25,10 +25,10 @@ function Character (avatar, name, health, attack, defense, reference) {
 
 //array of characters with their raw data
 var characters = [
-    ["assets/images/fTrunks.png", "Trunks", 100, 10, 5, "fTrunks"],
-    ["assets/images/gogeta.png", "Gogeta", 170, 25, 15, "gogeta"],
-    ["assets/images/gotenks.png", "Gotenks", 120, 15, 8, "gotenks"],
-    ["assets/images/mVegeta.png", "Majin Vegeta", 150, 30, 15, "mVegeta"]
+    ["assets/images/fTrunks.png", "Trunks", 100, 7, 5, "fTrunks"],
+    ["assets/images/gogeta.png", "Gogeta", 170, 11, 25, "gogeta"],
+    ["assets/images/gotenks.png", "Gotenks", 120, 7, 8, "gotenks"],
+    ["assets/images/mVegeta.png", "Majin Vegeta", 150, 9, 20, "mVegeta"]
 ];
 //Global Variables
     var playableCharacters = [];
@@ -55,6 +55,8 @@ function loadCharacters(characters) {
 function newGame() {
     $("#playAgain").hide()
     $("#yourCharacter").empty()
+    $("#enemies").empty()
+    $("#defendingOne").empty()
     playableCharacters = [];
     chosenOne = "";
     defendingOne = "";
@@ -152,6 +154,7 @@ function battle() {
 function healthCheck() {
     if (chosenOne.health <= 0) {
         $("#toolTip").html("<h1>YOU LOSE</h1>")
+        gameOver();
     }
     
     else if (defendingOne.health <= 0) {
@@ -159,7 +162,7 @@ function healthCheck() {
         $("#defendingOne").empty()
         isDefender = false
         deadOnes.push(defendingOne)
-        gameOver()
+        gameOver();
     }
     
 }
@@ -168,6 +171,10 @@ function healthCheck() {
 function gameOver() {
     if (deadOnes.length == enemies.length) {
         $("#toolTip").html("<h1> YOU ARE VICTORIOUS!</h1>")
+        $("#attackButton").hide();
+        $("#playAgain").show();
+    }
+    else{
         $("#attackButton").hide();
         $("#playAgain").show();
     }
