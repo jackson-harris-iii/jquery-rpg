@@ -1,35 +1,59 @@
 h1, h2, h3 {
-    display: inline
+    display: inline;
+    text-align: center;
+    
+}
+body{
+    background: url("../images/tournament.jpg");
+    background-repeat: no-repeat; 
 }
 .avatar {
-    max-height: 375spx;
+    max-height: 350px;
     max-width: 230px;
+    
 }
 .avatars {
    max-width:100%;
    max-height:60%; 
+   margin: auto;
+   
 }
 
 .characterSelect {
-background: linear-gradient(177deg, #19d4a4, #e5f00e, #c02f12, #e5f00e, #19d4a4);
+background: linear-gradient(177deg, #19d4a4, #d640ca, #1613bb, #d640ca, #19d4a4);
 background-size: 1000% 1000%;
 
 -webkit-animation: AnimationName 22s ease infinite;
 -moz-animation: AnimationName 22s ease infinite;
 animation: AnimationName 22s ease infinite;
+align-items: center;
 }
 
+.namePlate {
+font-size: 110%;
+}
 
 .yourCharacter {
+   background-color: rgba(21, 18, 167, 0.5)
+}
+.chosenOne {
+    margin: auto;
+   
+}
+
+.playable {
+     max-height: 80%;
 }
 
 .characterData {
     background: rgb(43, 40, 35);
-    color: #e5f00e
+    color: #e5f00e;
+    max-height: 80%;
 }
 
 .enemies {
-   background-color: rgb(34, 29, 29);
+   opacity: 1;
+   align-items: center;
     
 }
 
@@ -40,12 +64,10 @@ background-size: 1000% 1000%;
 -webkit-animation: AnimationName 22s ease infinite;
 -moz-animation: AnimationName 22s ease infinite;
 animation: AnimationName 22s ease infinite;
-display: inline;
-    
-}
 
-.defender {
-    background-color: grey;
+display: inline-block;
+align-items: center;
+    
 }
 
 .attackButton {
@@ -53,6 +75,8 @@ display: inline;
 }
 
 .defendingOne {
+    margin: auto;
+    background-color: rgba(128, 10, 10, 0.5)
 }
 
 .defenseWords {

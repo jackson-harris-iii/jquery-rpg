@@ -25,10 +25,10 @@ function Character (avatar, name, health, attack, defense, reference) {
 
 //array of characters with their raw data
 var characters = [
-    ["assets/images/fTrunks.png", "Trunks", 100, 7, 5, "fTrunks"],
-    ["assets/images/gogeta.png", "Gogeta", 170, 11, 25, "gogeta"],
+    ["assets/images/fTrunks.png", "Trunks", 100, 7, 7, "fTrunks"],
+    ["assets/images/gogeta.png", "Gogeta", 150, 11, 25, "gogeta"],
     ["assets/images/gotenks.png", "Gotenks", 120, 7, 8, "gotenks"],
-    ["assets/images/mVegeta.png", "Majin Vegeta", 150, 9, 20, "mVegeta"]
+    ["assets/images/mVegeta.png", "Majin Vegeta", 130, 9, 20, "mVegeta"]
 ];
 //Global Variables
     var playableCharacters = [];
@@ -54,6 +54,7 @@ function loadCharacters(characters) {
 
 function newGame() {
     $("#playAgain").hide()
+    $("chooseCharacter").show()
     $("#yourCharacter").empty()
     $("#enemies").empty()
     $("#defendingOne").empty()
@@ -77,6 +78,7 @@ function takePositions(character) {
    if (selectedYet == false){
        selectedYet = true;
        isDefender = false;
+       $("chooseCharacter").hide();
        $("#yourCharacter").show();
         var chosenID = character.target.id;
     //the character the player clicks on will be identified as their chosen player from the pool of playable characters
@@ -88,7 +90,7 @@ function takePositions(character) {
        yourHealth = chosenOne.health; 
 
         var selectedCharacter = $(character.currentTarget).remove();
-        selectedCharacter.appendTo("#yourCharacter").removeClass("playable");
+        selectedCharacter.appendTo("#yourCharacter").removeClass("playable").addClass("chosenOne");
 
     
         $("#toolTip").html("<h1>Pick An Enemy!</h1> <h3>Choose Wisely</h3>")
@@ -121,9 +123,7 @@ function takePositions(character) {
 }
 
 function battle() {
-    //here you will put the defindingOne on defense.
-    // console.log(chosenOne);
-    // console.log(defendingOne);
+   //This function handles the battle
     if ( chosenOne.health > 0 && defendingOne.health > 0 ){
         
         //broadcasts battle sequence 
@@ -144,8 +144,6 @@ function battle() {
         //Increases attack for your character after each attack
         chosenOne.powerUp()
 
-        console.log(chosenOne)
-        console.log(defendingOne)
 
     }
 }
@@ -173,7 +171,7 @@ function gameOver() {
         $("#attackButton").hide();
         $("#playAgain").show();
     }
-    else{
+    else if (chosenOne.health <= 0){
         $("#attackButton").hide();
         $("#playAgain").show();
     }
@@ -190,7 +188,7 @@ function displayCharacters(characters) {
         // console.log(element)
         
         //creates a Div to hold all of the character data
-        var avatarDiv = $("<div></div>").attr("id", element.reference).attr( "class", "card w-25 playable avatar");
+        var avatarDiv = $("<div></div>").attr("id", element.reference).attr("class", "card w-25 playable avatar mx-auto");
 
         //adds image to character card and enables a character to be chosen
         avatarDiv.prepend("<img class='card-img-top avatars w-100 characterSelect' id='" + element.reference + "' src='" + element.avatar + "'/>");
@@ -199,7 +197,7 @@ function displayCharacters(characters) {
         var avatarCardBlock = $("<div></div>").attr("class", "card-block h-25 characterData");
 
         //adds character data to the card block
-        avatarCardBlock.prepend("<h4 class='card-title characterData text-center'>" + element.name +"</h4>");
+        avatarCardBlock.prepend("<p class='card-title characterData text-center namePlate'>" + element.name +"</p>");
         avatarCardBlock.append("<p class='card-text characterData text-center' id='"+element.reference+"-health'> HP: " + element.health +"</p>");
 
         //adds all characer data to the holding div
