@@ -28,7 +28,8 @@ var characters = [
     ["assets/images/fTrunks.png", "Trunks", 100, 7, 7, "fTrunks"],
     ["assets/images/gogeta.png", "Gogeta", 150, 11, 25, "gogeta"],
     ["assets/images/gotenks.png", "Gotenks", 120, 7, 8, "gotenks"],
-    ["assets/images/mVegeta.png", "Majin Vegeta", 130, 9, 20, "mVegeta"]
+    ["assets/images/mVegeta.png", "Majin Vegeta", 130, 9, 20, "mVegeta"],
+    // ["assets/images/piccolo.png", "Piccolo", 110, 8, 17, "piccolo"]
 ];
 //Global Variables
     var playableCharacters = [];
